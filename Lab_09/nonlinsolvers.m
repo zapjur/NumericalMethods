@@ -14,40 +14,6 @@ for i = 1 : iter
         c = b-fb*(b-a)/(fb-fa);
     case 'newton-raphson',
         c = c-fc/fpc;
-    case 'sieczne'
-    C = zeros(1, iter);
-    tol = 1e-4;
-    
-    fa = feval(f, a);
-    fb = feval(f, b);
-    
-    if abs(fa) < tol
-        C = a;
-        return;
-    elseif abs(fb) < tol
-        C = b;
-        return;
-    end
-
-    for i = 1:iter
-
-        c = b - fb * (b - a) / (fb - fa);
-        fc = feval(f, c);
-       
-        if abs(fc) < tol
-            C(i) = c;
-            C = C(1:i);
-            break;
-        end
-        
-        a = b;
-        fa = fb;
-        b = c;
-        fb = fc;
-        
-        C(i) = c;
-    end
-
 
   otherwise,
       error('Brak metody');
